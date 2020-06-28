@@ -12,12 +12,22 @@ class App extends Component {
             selectedVideo: null, // {} or null
             videos: []
         }
+        this.submitHandler = this.submitHandler.bind(this)
     }
 
     componentDidMount() {
         const searchTerm = 'cockatiels'
+        this.makeSearch(searchTerm)
+    }
+
+    makeSearch(searchTerm) {
         const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${keys.API_KEY}&q=${searchTerm}&type=video`
         fetch(url).then(r => r.json()).then(res => this.setState({videos: res.items, selectedVideo: res.items[0]}))
+    }
+
+    // The handler is saying that I am going to pass this to something that is onSubmit
+    submitHandler(searchTerm) {
+        this.makeSearch(searchTerm)
     }
 
   render() {
@@ -25,7 +35,7 @@ class App extends Component {
     return (
       <div className="ui grid container">
         {/* What goes here? */}
-        <Searchbar />
+        <Searchbar submitHandler={this.submitHandler}/>
         <ViewerContainer selectedVideo={this.state.selectedVideo}/>
         <VideoList videos={this.state.videos}/>
       </div>
