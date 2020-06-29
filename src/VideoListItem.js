@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VideoListItem = ({singleVideo}) => {
+const VideoListItem = ({singleVideo, clickHandler}) => {
 
   return (
     <div className="item"  >
@@ -8,7 +8,7 @@ const VideoListItem = ({singleVideo}) => {
         {/* Change the image source */}
         <img src={''} />
       </div>
-      <div className="content">
+      <div onClick={() => clickHandler(singleVideo)} className="content">
         <img src={singleVideo.snippet.thumbnails.default.url} />
         <h3>{singleVideo.snippet.title}</h3>
       </div>
@@ -20,3 +20,7 @@ export default VideoListItem
 
 
 // const imageUrl = video.snippet.thumbnails.default.url
+
+// () => clickHandler(singleVideo) has to be a callback function
+//.. because we dont want to call it when it renders we want to
+//.. call it on click

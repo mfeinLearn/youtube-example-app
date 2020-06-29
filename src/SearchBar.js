@@ -11,7 +11,10 @@ class SearchBar extends React.Component {
         this.setState({ searchTerm: evt.target.value })
     }
 
-    submit = () => this.props.submitHandler(this.state.searchTerm)
+    submit = (evt) => {// any time you have a submit handler you are going to need event.preventDefault()
+        evt.preventDefault()
+        this.props.submitHandler(this.state.searchTerm)
+    }
 
     //changes dont refresh the page it just it just changes
   render() {

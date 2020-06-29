@@ -3,9 +3,9 @@ import VideoListItem from './VideoListItem'
 // What type of component is this?
 // What can it do?
 // What can't it do?
-const VideoList = ({ videos }) => {
+const VideoList = ({ videos, clickHandler }) => {
     const videoComponents = videos.map(video => <VideoListItem key={video.id.videoId}
-        singleVideo={video} />)
+        clickHandler={clickHandler} singleVideo={video} />)
   return (
     <div className="four wide column">
       <div className="ui relaxed items">

@@ -13,6 +13,7 @@ class App extends Component {
             videos: []
         }
         this.submitHandler = this.submitHandler.bind(this)
+        this.clickHandler = this.clickHandler.bind(this)
     }
 
     componentDidMount() {
@@ -30,6 +31,19 @@ class App extends Component {
         this.makeSearch(searchTerm)
     }
 
+
+    // what is our click handler changing? state
+    // which piece of state? selectedVideo
+    // When we click on a videolistitem we want to change
+    //.. the selectedVideo which lives in app so we need to define clickHandler
+    //.. in app. Because it is also going to change what is in our ViewerContainer
+    //.. so in order to click on a video list item and for it to show up here
+    //.. it needs to go through app.
+    // Any time you have a piece of state you need to know who is that state is going to be changed
+    clickHandler(videoObj) {
+        this.setState({selectedVideo: videoObj })
+    }
+
   render() {
       console.log(this.state)// everytime it rerenders we can see the state
     return (
@@ -37,7 +51,7 @@ class App extends Component {
         {/* What goes here? */}
         <Searchbar submitHandler={this.submitHandler}/>
         <ViewerContainer selectedVideo={this.state.selectedVideo}/>
-        <VideoList videos={this.state.videos}/>
+        <VideoList clickHandler={this.clickHandler} videos={this.state.videos}/>
       </div>
     );
   }
